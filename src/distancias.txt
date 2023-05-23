@@ -1,0 +1,6 @@
+DelValle Landivar 10
+Landivar Mariano 90
+Mariano Usac 40
+Usac Landivar 55
+Usac DelValle 45
+DelValle Mariano 80 
