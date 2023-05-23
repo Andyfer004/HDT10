@@ -1,10 +1,21 @@
 import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Ingrese la ruta del archivo: ");
+        String ruta = sc.nextLine();
+
+
+        Controller controller = new Controller(ruta);
+        
+
+
         System.out.println("-----------------------------------------");
         System.out.println("BIENVENIDO AL PROGRAMA DE RUTAS CIUDADES");
         System.out.println("-----------------------------------------");
-        Scanner sc = new Scanner(System.in);
+        
         int opcion;
         do {
             System.out.println("1. Ruta más corta entre dos ciudades");
@@ -15,7 +26,13 @@ public class Main {
             opcion = sc.nextInt();
             switch (opcion) {
                 case 1:
-                    System.out.println("Ingresar ciudades");
+                    controller.calcularRutas();
+                    System.out.print("Ingrese la universidad de origen: ");
+                    String origen = sc.nextLine();
+                    System.out.print("Ingrese la universidad de destino: ");
+                    String destino = sc.nextLine();
+
+                    controller.mostrarRutaMasCorta(origen, destino);
                     break;
                 case 2:
                     System.out.println("Ingresar rutas");

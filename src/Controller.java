@@ -1,64 +1,112 @@
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
-
 public class Controller {
-    
-    // Scanner
-    Scanner sc = new Scanner(System.in);
 
-    //Lugares y distancias
-    ArrayList<String> universidades = new ArrayList<>();
-    ArrayList<String> distancias = new ArrayList<>();
+    private int[][] distancias;
+    private String[][] recorridos;
+    private String[] vertices;
+    private int SIZE;
 
-    // Configuracion para el archivo
-    String ruta = "./distancias.txt";
-    File archivo = null;
-    FileReader fr = null;
-    BufferedReader br = null;
+    public Controller(String rutaArchivo) {
+        leerArchivo(rutaArchivo);
+    }
 
-    FloydWarshall grafo;
+    private void leerArchivo(String rutaArchivo) {
+        try {
+            File archivo = new File(rutaArchivo);
+            FileReader fr = new FileReader(archivo);
+            BufferedReader br = new BufferedReader(fr);
 
-    /*
-     * Encontrar la ruta mas corta entre 2 universidades, utilizando el algoritmo de FloydWarshall
-     * 
-     */
-    public void rutaMasCorta() {
+            // Leer la primera línea para obtener el tamaño de la matriz
+            String primeraLinea = br.readLine();
+            String[] partes = primeraLinea.split(" ");
+            SIZE = partes.length;
 
-        System.out.println("-----------------RUTA MAS CORTA------------------");
-        System.out.println("Ingrese la universidad de origen: ");
-        String universidadInicial = sc.nextLine().toLowerCase();
+            // Inicializar las matrices
+            distancias = new int[SIZE][SIZE];
+            recorridos = new String[SIZE][SIZE];
+            vertices = new String[SIZE];
 
-        System.out.println("Ingrese la universidad de destino: ");
-        String universidadFinal = sc.nextLine().toLowerCase();
+            // Leer las demás líneas del archivo
+            int fila = 0;
+            while ((primeraLinea = br.readLine()) != null) {
+                partes = primeraLinea.split(" ");
+                vertices[fila] = partes[0];
 
-        // Compara cada ciudad con las demas ciudades
-        for (int i = 0; i < universidades.size(); i++) {
-            for (int j = 0; j < universidades.size(); j++) {
-                if (i > j) {
+                for (int columna = 0; columna < SIZE; columna++) {
+                    distancias[fila][columna] = Integer.parseInt(partes[columna + 2]);
+                    recorridos[fila][columna] = partes[1];
+                }
 
-                    // Mira si el origen y el destino son iguales a los indicados
-                    if ((universidadInicial.equals(grafo.getNombre(i).toLowerCase())
-                            && universidadFinal.equals(grafo.getNombre(j).toLowerCase()))
-                            || (universidadFinal.equals(grafo.getNombre(i).toLowerCase())
-                                    && universidadInicial.equals(grafo.getNombre(j).toLowerCase()))) {
+                fila++;
+            }
 
-                        
+            br.close();
+            fr.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void calcularRutas() {
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                for (int k = 0; k < SIZE; k++) {
+                    if ((i != j) && (i != k)) {
+                        int suma = distancias[j][i] + distancias[i][k];
+                        if (suma < distancias[j][k]) {
+                            distancias[j][k] = suma;
+                            recorridos[j][k] = vertices[i];
+                        }
                     }
-
                 }
             }
         }
-
     }
 
+    public void mostrarMatrizDistancias() {
+        System.out.println("Matriz de Distancias:");
+        for (int i = 0; i < SIZE; i++) {
+            System.out.println(Arrays.toString(distancias[i]));
+        }
+    }
 
+    public void mostrarRutaMasCorta(String origen, String destino) {
+        int indiceOrigen = obtenerIndiceCiudad(origen);
+        int indiceDestino = obtenerIndiceCiudad(destino);
+
+        if (indiceOrigen == -1 || indiceDestino == -1) {
+            System.out.println("Universidades no encontradas.");
+            return;
+        }
+
+        String ruta = origen;
+        int distancia = distancias[indiceOrigen][indiceDestino];
+
+        while (!vertices[indiceOrigen].equals(destino)) {
+            ruta += " -> " + vertices[indiceOrigen];
+            indiceOrigen = obtenerIndiceCiudad(vertices[indiceOrigen]);
+        }
+
+        ruta += " -> " + destino;
+
+        System.out.println("Ruta más corta:");
+        System.out.println(ruta);
+        System.out.println("Distancia: " + distancia);
+    }
+
+    private int obtenerIndiceCiudad(String ciudad) {
+        for (int i = 0; i < SIZE; i++) {
+            if (vertices[i].equals(ciudad)) {
+                return i;
+            }
+        }
+        return -1;
+    }
 
 }
