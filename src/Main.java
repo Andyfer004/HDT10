@@ -33,9 +33,10 @@ public class Main {
         int opcion;
         do {
             System.out.println("1. Ruta más corta entre dos universidades");
-            System.out.println("2. Nombre ciudad centro del grafo");
+            System.out.println("2. Nombre de la Universidad en el centro del grafo");
             System.out.println("3. Modificar grafo");
-            System.out.println("4. Salir");
+            System.out.println("4. Acerca del programa");
+            System.out.println("0. Salir");
             System.out.print("Ingrese una opcion: ");
             opcion = scan.nextInt();
             switch (opcion) {
@@ -63,7 +64,13 @@ public class Main {
                     System.out.println("Calcular rutas");
                     break;
                 case 4:
-                    System.out.println("Salir");
+                    System.out.println("Acerca del programa");
+                    System.out.println("Este programa fue desarrollado por Gabriel Alberto Paz Gonzalez y Andy Fernando Fuentes Velasquez");
+                    System.out.println("para la clase de Algoritmos y Estructuras de Datos de la Universidad del Valle de Guatemala");
+                    System.out.println(" ");
+                    System.out.println("El programa consiste en un grafo que contiene las distancias entre las universidades");
+                    System.out.println(", y calcula la ruta mas corta entre dos universidades, tomando en cuenta");
+                    System.out.println("el clima en el que se viaja");
                     break;
                 default:
                     System.out.println("Opcion no valida");
