@@ -2,7 +2,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-
+        Controller controller = new Controller();
         System.out.println("-----------------------------------------");
         System.out.println("BIENVENIDO AL PROGRAMA DE RUTAS CIUDADES");
         System.out.println("-----------------------------------------");
@@ -17,7 +17,7 @@ public class Main {
             opcion = scan.nextInt();
             switch (opcion) {
                 case 1:
-                      System.out.println("Ingrese ciudad origen: ");
+                      controller.Ruta_corta();
                     break;
                 case 2:
                     System.out.println("Ingresar rutas");
