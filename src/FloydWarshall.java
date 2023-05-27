@@ -1,18 +1,14 @@
 public class FloydWarshall {
-
     private int[][] distancias;
     private String[][] recorridos;
     private String[] vertices;
     private int SIZE;
 
-    public FloydWarshall(int [][]_distancias, String[][] _recorridos, int matriz_size) {
-        SIZE = matriz_size;
-        distancias = _distancias;
-        recorridos = _recorridos;
-        vertices = new String[matriz_size];
-        for (int i = 0; i < matriz_size; i++) {
-            vertices[i] = _recorridos[0][i];
-        }
+    public FloydWarshall(int[][] distancias, String[][] recorridos, String[] vertices,int SIZE) {
+        this.distancias = distancias;
+        this.recorridos = recorridos;
+        this.vertices=vertices;
+        this.SIZE = SIZE;
     }
 
     /**
@@ -60,10 +56,9 @@ public class FloydWarshall {
     
 
     public void CalcularRutas() {
-        for (int i = 0; i < SIZE; i++) { //Que fila y que columna trabajo
+        for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
                 for (int k = 0; k < SIZE; k++) {
-
                     if ((i != j) && (i != k)) {
                         int suma = distancias[j][i] + distancias[i][k];
                         if (suma < distancias[j][k]) {
@@ -71,8 +66,8 @@ public class FloydWarshall {
                             recorridos[j][k] = vertices[i];
                         }
                     }
-
                 }
+            
             }
         }
     }
