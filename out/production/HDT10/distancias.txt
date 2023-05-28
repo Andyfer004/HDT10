@@ -1,0 +1,12 @@
+DelValle Landivar 10 15 20 40
+Landivar Mariano 90 95 100 120
+Mariano Usac 40 45 50 70
+Usac Landivar 55 60 65 85
+Usac DelValle 45 50 55 75
+DelValle Mariano 80 85 90 110
+DelValle Usac 70 75 80 100
+Landivar Usac 30 35 40 60
+Mariano DelValle 75 80 85 105
+Usac Mariano 35 40 45 65
+Landivar DelValle 25 30 35 55
+Marino Landivar 65 70 75 95
