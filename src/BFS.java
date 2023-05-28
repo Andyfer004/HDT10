@@ -1,3 +1,16 @@
+/**
+ * Universidad del Valle de Guatemala
+ * Algoritmos y Estructuras de Datos
+ * Seccion: 10
+ * Hoja de Trabajo #10
+ *
+ * Implementacion de grafos
+ *
+ * Integrantes:
+ *          Gabriel Alberto Paz Gonzalez 221087
+ *          Andy Fernando Fuentes Velasquez 22944
+ *
+ */
 import java.util.*;
 
 public class BFS {
