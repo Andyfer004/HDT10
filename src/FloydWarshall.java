@@ -71,4 +71,8 @@ public class FloydWarshall {
             }
         }
     }
+
+    public String[] getVertices() {
+        return vertices;
+    }
 }

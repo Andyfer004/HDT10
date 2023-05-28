@@ -30,5 +30,8 @@ public class BFS {
         }
     }
 
+    public int getDistancia(int j) {
+        return j;
+    }
 }
 
